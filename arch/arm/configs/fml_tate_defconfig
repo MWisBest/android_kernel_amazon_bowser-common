@@ -1017,7 +1017,6 @@ CONFIG_UID_STAT=y
 # CONFIG_OMAP_DIE_TEMP_SENSOR is not set
 # CONFIG_CDC_TCXO is not set
 # CONFIG_C2PORT is not set
-CONFIG_BLX=y
 
 #
 # EEPROM support
