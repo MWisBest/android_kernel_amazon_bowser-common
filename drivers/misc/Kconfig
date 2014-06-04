@@ -556,4 +556,10 @@ source "drivers/misc/gcx/gcioctl/Kconfig"
 source "drivers/misc/gcx/gcbv/Kconfig"
 source "drivers/misc/cache-2dmanager/Kconfig"
 
+config BLX
+	bool "Support for Battery Life eXtender"
+	default y
+	help
+	  Say Y here to enable Battery Life eXtender
+
 endif # MISC_DEVICES

@@ -23,6 +23,9 @@
 #if defined(CONFIG_EARLYSUSPEND)
 #include <linux/earlysuspend.h>
 #endif
+#ifdef CONFIG_BLX
+#include <linux/blx.h>
+#endif
 
 /*
  * I2C registers that need to be read
@@ -516,9 +519,15 @@ static void battery_handle_work(struct work_struct *work)
 		goto out;
 	} else {
 		value = info->battery_status;
+#ifdef CONFIG_BLX
+		if ((flags & BQ27541_FLAGS_FC)
+				&& (info->battery_capacity >= get_charginglimit())
+				&& (info->battery_current == 0)) {
+#else
 		if ((flags & BQ27541_FLAGS_FC)
 				&& (info->battery_capacity == 100)
 				&& (info->battery_current == 0)) {
+#endif
 			value = POWER_SUPPLY_STATUS_FULL;
 		} else if ((flags & BQ27541_FLAGS_DSG) || (info->battery_current <= 0)) {
 			value = POWER_SUPPLY_STATUS_DISCHARGING;
