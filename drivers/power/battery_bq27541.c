@@ -520,7 +520,9 @@ static void battery_handle_work(struct work_struct *work)
 	} else {
 		value = info->battery_status;
 #ifdef CONFIG_BLX
-		if (info->battery_capacity >= get_charginglimit()) {
+		if ((flags & BQ27541_FLAGS_FC)
+				&& (info->battery_capacity >= get_charginglimit())
+				&& (info->battery_current == 0)) {
 #else
 		if ((flags & BQ27541_FLAGS_FC)
 				&& (info->battery_capacity == 100)
